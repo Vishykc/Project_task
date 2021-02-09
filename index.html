@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic forum SPA</title>
 
-    <!-- added Bootstrap -->
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      
 
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    
 
 </head>
 <body>
@@ -21,19 +24,51 @@
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">userId</th>
-                <th scope="col">id</th>
-                <th scope="col">title</th>
-                <th scope="col">body</th>
+        
+                <th scope="col">all posts</th>
+                
               </tr>
             </thead>
             <tbody>
               <tr v-for="post in posts">
-                <td>{{ post.userId }}</td>
-                <td>{{ post.id }}</td>
+                
                 <td>{{ post.title }}</td>
-                <td>{{ post.body }}</td>
+
+
+                <td>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details">
+                        Click me!
+                      </button>
+
+                      <!-- <div class="modal fade" id="details">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h2>Details and comments</h2>
+                            </div>
+                            <div class="modal-body">
+                                Some content goes here!
+                            </div>  
+                            <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                              
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div> -->
+
+                </td>
+
               </tr>
+
+
             </tbody>
           </table>
     </div>
@@ -63,8 +98,10 @@
 
 
 
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-
+<!-- Javascript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 </html>
