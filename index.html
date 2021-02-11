@@ -30,9 +30,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="post in posts">
+              <tr v-for="post1 in posts">
                 
-                <td>{{ post.title }}</td>
+               
 
 
                 <td>
@@ -45,10 +45,12 @@
                           <h5 class="modal-title" id="exampleModalLabel">Details and comments</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                          <p><b>userId:</b> {{ post.userId }}</p>
-                          <p><b>id:</b> {{ post.id }}</p>
-                          <p><b>body:</b> {{ post.body }}</p>
+                        <div v-for="post2 in posts" class="modal-body">
+                         <script> if ({{ post2.id }} === {{post1.id}}){ </script>
+                          <p><b>userId:</b> {{ post1.userId }}</p>
+                          <p><b>id:</b> {{ post1.id }}</p>
+                          <p><b>body:</b> {{ post1.body }}</p>
+                          <script>}</script>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,7 +62,7 @@
 
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailsandcomments">
-                    Details and comments
+                    {{ post1.title }}
                   </button>
 
                 </td>
