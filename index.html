@@ -48,9 +48,27 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
   
+                      <h3>Post:</h3>
+
                       <p><b>userId:</b> {{ selected.userId }}</p>
                       <p><b>id:</b> {{ selected.id }}</p>
                       <p><b>body:</b> {{ selected.body }}</p>
+
+                      <br>
+
+                      <h3>Comments:</h3>
+
+
+                      <div v-for="comment in comments">
+                        <div v-if="selected.id  == comment.postId"> 
+                          <p><b>commentId:</b> {{ comment.id }}</p>
+                          <p><b></b>name:</b> {{ comment.name }}</p>
+                          <p>email:</b> {{ comment.email }}</p>
+                          <p>comment:</b> {{ comment.body }}</p>
+                        </div>
+
+
+                      </div>
   
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -81,9 +99,9 @@
 
         },
 
-        async created() {
+        mounted: function() {
 
-            await axios.get('https://jsonplaceholder.typicode.com/posts')
+            axios.get('https://jsonplaceholder.typicode.com/posts')
                 .then(response => {
                     this.posts = response.data;
                     console.log(response);
@@ -91,22 +109,19 @@
                 .catch(error => {
                 console.log(error);
             });
-        },
 
-        async created2() {
+            
+            axios.get('https://jsonplaceholder.typicode.com/comments')
+                .then(response => {
+                    this.comments = response.data;
+                    console.log(response);
+            })
+                .catch(error => {
+                console.log(error);
+            });
 
-        await axios.get('https://jsonplaceholder.typicode.com/comments')
-            .then(response => {
-                this.comments = response.data;
-                console.log(response);
-        })
-            .catch(error => {
-            console.log(error);
-        });
         },
         
-
- 
   });
 
 
