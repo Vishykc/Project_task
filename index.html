@@ -30,76 +30,60 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="post in posts">
-               
-                
-               
-
-
+              <tr v-for="post of posts">
                 <td>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="detailsandcomments" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" click="sendInfo(post)">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Details and comments</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <div>
-                         
-                          <p><b>userId:</b> {{ post.userId }}</p>
-                          <p><b>id:</b> {{ post.id }}</p>
-                          <p><b>body:</b> {{ post.body }}</p>
-                        </div>
-
-                        </div>
-                         
-                        
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Button trigger modal -->
-                  <b-modal type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailsandcomments" click="sendInfo(post)">
+                  <!-- Button trigger modal and selecting the right post to copy it into "selected structure" -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailsandcomments" @click="setSelected(post)">
                     {{ post.title }}
-                  </b-modal>
-
+                  </button>
                 </td>
 
               </tr>
+              <!-- Modal -->
+              <div class="modal fade" id="detailsandcomments" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Details and comments</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+  
+                      <p><b>userId:</b> {{ selected.userId }}</p>
+                      <p><b>id:</b> {{ selected.id }}</p>
+                      <p><b>body:</b> {{ selected.body }}</p>
+  
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
             </tbody>
           </table>
     </div>
-
-
     <script>
         var app = new Vue ({
         el: "#app",
+        
         data: {
             posts: [],
-        
-
-            selectedPost: "",
-      },
-
-        methods: {
-          sendInfo(post){
-            this.selectedPost = post;
-          }
+            comments: [],
+            selected : {}
         },
-        
 
-        mounted: function() {
+        methods : {
+          setSelected:  function(post){
+            console.log(post);
+            this.selected = post;
+          }
 
-            axios.get('https://jsonplaceholder.typicode.com/posts')
+        },
+
+        async created() {
+
+            await axios.get('https://jsonplaceholder.typicode.com/posts')
                 .then(response => {
                     this.posts = response.data;
                     console.log(response);
@@ -107,7 +91,21 @@
                 .catch(error => {
                 console.log(error);
             });
-        }
+        },
+
+        async created2() {
+
+        await axios.get('https://jsonplaceholder.typicode.com/comments')
+            .then(response => {
+                this.comments = response.data;
+                console.log(response);
+        })
+            .catch(error => {
+            console.log(error);
+        });
+        },
+        
+
  
   });
 
