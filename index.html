@@ -20,14 +20,17 @@
 
 </head>
 <body>
+
+  <div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-12"><h2>All posts</h2></div>
+    </div>
+  </div>>
+
     <div class="container mt-4" id="app">
         <table class="table table-bordered">
             <thead>
-              <tr>
-        
-                <th scope="col">all posts</th>
-                
-              </tr>
+              
             </thead>
             <tbody>
               <tr v-for="post of posts">
@@ -80,7 +83,55 @@
 
             </tbody>
           </table>
+
+
+
+          <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-12"><h2>All users</h2></div>
+            </div>
+          </div>
+
+          <div class="container mt-4" id="app">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">username</th>
+                    <th scope="col">email</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <!-- var length = users.length;
+                  console.log("length"); -->
+
+                  <tr v-for="user in users">
+                    <td>
+                      {{ user.id }}
+                    </td>
+                    <td>
+                      {{ user.name }}
+                    </td>
+                    <td>
+                      {{ user.username }}
+                    </td>
+                    <td>
+                      {{ user.email }}
+                    </td>
+    
+                  </tr>
+                 
+    
+    
+                </tbody>
+              </table>
+
+
     </div>
+
+
     <script>
         var app = new Vue ({
         el: "#app",
@@ -88,7 +139,8 @@
         data: {
             posts: [],
             comments: [],
-            selected : {}
+            selected : {},
+            users: []
         },
 
         methods : {
@@ -120,9 +172,18 @@
                 console.log(error);
             });
 
-        },
+            axios.get('https://jsonplaceholder.typicode.com/users')
+                .then(response => {
+                    this.users = response.data;
+                    console.log(response);
+            })
+                .catch(error => {
+                console.log(error);
+            });
+
+        }
         
-  });
+  })
 
 
     </script>
