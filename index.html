@@ -21,16 +21,13 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="row align-items-center">
-        <div class="col-md-12"><h2>All posts</h2></div>
-    </div>
-  </div>>
+    <!-- I know inline styling is a bad style to write, but need this only two times on the page -->
+        <h2 style="width: 80%; margin: 0 auto;">All posts</h2>
 
     <div class="container mt-4" id="app">
         <table class="table table-bordered">
             <thead>
-              
+            
             </thead>
             <tbody>
               <tr v-for="post of posts">
@@ -84,52 +81,31 @@
             </tbody>
           </table>
 
+              <h2 style="width: 80%; margin: 0 auto;">All users</h2>
 
+          <table class="table table-bordered">
+            <thead>
+              <td>id</td>
+              <td>name</td>
+              <td>username</td>
+              <td>email</td>
+            </thead>
+            <tbody>
+              <tr v-for="user in users">
+                <td> {{ user.id }} </td>
+                <td> {{ user.name }} </td>
+                <td> {{ user.username }} </td>
+                <td> {{ user.email }} </td>
+              </tr>
+             
+            </tbody>
+          </table>
+    </div>
 
-          <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12"><h2>All users</h2></div>
-            </div>
-          </div>
-
-          <div class="container mt-4" id="app">
-            <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">name</th>
-                    <th scope="col">username</th>
-                    <th scope="col">email</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  <!-- var length = users.length;
-                  console.log("length"); -->
-
-                  <tr v-for="user in users">
-                    <td>
-                      {{ user.id }}
-                    </td>
-                    <td>
-                      {{ user.name }}
-                    </td>
-                    <td>
-                      {{ user.username }}
-                    </td>
-                    <td>
-                      {{ user.email }}
-                    </td>
-    
-                  </tr>
-                 
-    
-    
-                </tbody>
-              </table>
 
 
     </div>
+
 
 
     <script>
@@ -139,8 +115,8 @@
         data: {
             posts: [],
             comments: [],
-            selected : {},
-            users: []
+            selected: {},
+            users: [],
         },
 
         methods : {
@@ -172,6 +148,8 @@
                 console.log(error);
             });
 
+        
+
             axios.get('https://jsonplaceholder.typicode.com/users')
                 .then(response => {
                     this.users = response.data;
@@ -181,9 +159,9 @@
                 console.log(error);
             });
 
-        }
+        },
         
-  })
+  });
 
 
     </script>
